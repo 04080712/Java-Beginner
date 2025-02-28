@@ -1,0 +1,94 @@
+package pacote_de_estudo;
+
+import java.util.Scanner;
+
+public class ConversorDeTemperatura {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println(".".repeat(37));
+        System.out.print("Graus a serem transformados: ");
+        float graus = scanner.nextFloat();
+        scanner.nextLine();  // Limpa o buffer do scanner
+
+        System.out.println("Unidade de Medida atual:");
+        System.out.println("|C| Celsius |F| Fahrenheit |K| Kelvin|");
+        String medida = scanner.nextLine().toLowerCase();
+
+        System.out.println("Unidade de Medida desejada:");
+        System.out.println("|C| Celsius |F| Fahrenheit |K| Kelvin|");
+        String temp = scanner.nextLine().toLowerCase();
+
+        double resultado = 0.0;
+        boolean valido = true;
+
+        switch (medida) {
+            case "c":
+                switch (temp) {
+                    case "c":
+                        System.out.println("A temperatura já está em Celsius.");
+                        break;
+                    case "f":
+                        resultado = (graus * 9 / 5) + 32;
+                        System.out.printf("Resultado: %.2f °F\n", resultado);
+                        break;
+                    case "k":
+                        resultado = graus + 273.15;
+                        System.out.printf("Resultado: %.2f K\n", resultado);
+                        break;
+                    default:
+                        valido = false;
+                        break;
+                }
+                break;
+
+            case "f":
+                switch (temp) {
+                    case "c":
+                        resultado = (graus - 32) * 5 / 9;
+                        System.out.printf("Resultado: %.2f °C\n", resultado);
+                        break;
+                    case "f":
+                        System.out.println("A temperatura já está em Fahrenheit.");
+                        break;
+                    case "k":
+                        resultado = (graus - 32) * 5 / 9 + 273.15;
+                        System.out.printf("Resultado: %.2f K\n", resultado);
+                        break;
+                    default:
+                        valido = false;
+                        break;
+                }
+                break;
+
+            case "k":
+                switch (temp) {
+                    case "c":
+                        resultado = graus - 273.15;
+                        System.out.printf("Resultado: %.2f °C\n", resultado);
+                        break;
+                    case "f":
+                        resultado = (graus - 273.15) * 9 / 5 + 32;
+                        System.out.printf("Resultado: %.2f °F\n", resultado);
+                        break;
+                    case "k":
+                        System.out.println("A temperatura já está em Kelvin.");
+                        break;
+                    default:
+                        valido = false;
+                        break;
+                }
+                break;
+
+            default:
+                valido = false;
+                break;
+        }
+
+        if (!valido) {
+            System.out.println("Unidade de medida inválida.");
+        }
+
+        scanner.close();
+    }
+}
